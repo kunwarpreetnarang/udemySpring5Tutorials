@@ -52,6 +52,15 @@ public class BootstrapData implements CommandLineRunner {
             subjectRepository.save(sub1);
             subjectRepository.save(sub2);
 
+            s1.setSubject(sub1);
+            s1.setSubject(sub2);
+            s2.setSubject(sub1);
+            s2.setSubject(sub2);
+            sub1.getStudent().add(s1);
+            sub2.getStudent().add(s2);
+            sub1.getStudent().add(s2);
+            sub2.getStudent().add(s1);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,6 +68,6 @@ public class BootstrapData implements CommandLineRunner {
         System.out.println("No. of student: " + studentRepository.count());
         System.out.println("No. of teachers: " + teacherRepository.count());
         System.out.println("No. of subject: " + subjectRepository.count());
-
+        System.out.println("Subject with no. of students: \n sub1: " + sub1.getStudent().size() + " sub2: " + sub2.getStudent().size());
     }
 }

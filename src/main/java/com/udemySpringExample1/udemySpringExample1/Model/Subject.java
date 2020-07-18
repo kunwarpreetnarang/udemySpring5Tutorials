@@ -1,10 +1,9 @@
 package com.udemySpringExample1.udemySpringExample1.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Subject {
@@ -15,6 +14,10 @@ public class Subject {
 
     private String subjectName;
     private String subjectDescription;
+
+    @OneToMany
+    @JoinColumn(name="subject_id")
+    Set<Student> student = new HashSet<Student>();
 
     public Subject(){
 
@@ -70,4 +73,13 @@ public class Subject {
     public void setSubjectDescription(String subjectDescription) {
         this.subjectDescription = subjectDescription;
     }
+
+    public Set<Student> getStudent() {
+        return student;
+    }
+
+    public void setStudent(Set<Student> student) {
+        this.student = student;
+    }
+
 }

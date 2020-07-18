@@ -1,12 +1,6 @@
 package com.udemySpringExample1.udemySpringExample1.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,6 +26,9 @@ public class Student {
     @JoinTable(name = "student_teacher", joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id"))
     private List<Teacher> teachers = new ArrayList<>();
+
+    @ManyToOne
+    Subject subject;
 
     public Student() {
 
@@ -74,6 +71,13 @@ public class Student {
         this.id = id;
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
 
     @Override
     public String toString() {
