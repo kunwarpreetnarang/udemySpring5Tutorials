@@ -1,6 +1,7 @@
 package com.udemySpringExample1.udemySpringExample1.dependencyInjection;
 
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.ConstructorInjectorController;
+import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.ProfilesController;
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.PropertyInjectorController;
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.SetterInjectorController;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +14,10 @@ public class DependencyInjectionApplication {
     public static void main(String[] args) {
 
         ApplicationContext context = SpringApplication.run(DependencyInjectionApplication.class, args);
+
+        ProfilesController profileController = (ProfilesController) context.getBean("profilesController");
+        System.out.println("-----Active Profile Bean-----");
+        System.out.println(profileController.showGreeting());
 
         ConstructorInjectorController constructorInjectorController = (ConstructorInjectorController) context.getBean("constructorInjectorController");
         System.out.println("-----Constructor Bean-----");

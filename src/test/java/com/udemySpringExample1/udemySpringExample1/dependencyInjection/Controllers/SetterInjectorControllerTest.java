@@ -1,10 +1,8 @@
 package com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers;
 
-import com.udemySpringExample1.udemySpringExample1.dependencyInjection.businessLogic.GreetingServiceImpl;
+import com.udemySpringExample1.udemySpringExample1.dependencyInjection.businessLogic.ConstructorGreetingServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class SetterInjectorControllerTest {
 
@@ -12,7 +10,7 @@ public class SetterInjectorControllerTest {
     @Before
     public void setUp() throws Exception {
         setterInjectorController = new SetterInjectorController();
-        setterInjectorController.setGreetingService(new GreetingServiceImpl());
+        setterInjectorController.setGreetingService(new ConstructorGreetingServiceImpl());
     }
 
     @Test
