@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.udemySpringExample1</groupId>
 	<artifactId>udemySpringExample1</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>udemySpringExample1</name>
 	<description>Demo project one for Spring Boot</description>
 
@@ -100,7 +100,7 @@
 
 
   <scm>
-    <tag>udemySpringExample1-0.0.2</tag>
+    <tag>udemySpringExample1-0.0.1</tag>
 	<developerConnection>scm:git:https://github.com/kunwarpreetnarang/udemySpring5Tutorials.git</developerConnection>
   </scm>
 </project>
