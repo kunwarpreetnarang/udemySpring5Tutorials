@@ -12,6 +12,7 @@ public class JokesServiceImpl implements JokesService{
 
     @Autowired
     public JokesServiceImpl() {
+        // used new() instead of parameterized constructor, as it was npt creating bean
         this.chuckNorrisQuotes = new ChuckNorrisQuotes();
     }
 
