@@ -1,0 +1,5 @@
+guru:
+  jms:
+    username: abcd
+    password: mbm1
+    url: mbmnow.optum.com
