@@ -1,6 +1,7 @@
 package com.udemySpringExample1.udemySpringExample1.externalProperties.config;
 
 import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeDataLoader;
+import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeJmsLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,15 @@ public class PropertiesConfiguration {
     @Value("${mysql.url}")
     String url;
 
+    @Value("${guru.jms.username}")
+    String jmsUser;
+
+    @Value("${guru.jms.password}")
+    String jmsPassword;
+
+    @Value("${guru.jms.url}")
+    String jmsUrl;
+
     @Autowired
     Environment env;
 
@@ -39,6 +49,15 @@ public class PropertiesConfiguration {
         fakeDataLoader.setPassword(env.getProperty("PASSWORD"));
         fakeDataLoader.setUrl(url);
         return fakeDataLoader;
+    }
+
+    @Bean
+    FakeJmsLoader getFakeJmsLoader() {
+        FakeJmsLoader fakeJmsLoader = new FakeJmsLoader();
+        fakeJmsLoader.setUsername(jmsUser);
+        fakeJmsLoader.setPassword(jmsPassword);
+        fakeJmsLoader.setUrl(jmsUrl);
+        return fakeJmsLoader;
     }
 
     // As per spring 5 framework doc we don't need to define below bean any more.
