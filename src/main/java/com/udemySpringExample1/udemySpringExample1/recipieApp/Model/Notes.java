@@ -11,6 +11,7 @@ public class Notes {
     @OneToOne
     private Recipies recipies;
 
+    @Lob
     private String recipieNotes;
 
     public Long getId() {

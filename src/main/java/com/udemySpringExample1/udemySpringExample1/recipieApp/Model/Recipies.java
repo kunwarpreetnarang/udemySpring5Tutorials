@@ -1,6 +1,8 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Recipies {
@@ -22,10 +24,14 @@ public class Recipies {
 
     private int servings;
 
+    @Lob
     private Byte[] images;
 
     @OneToOne(cascade = CascadeType.ALL)
     Notes notes;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipies")
+    Set<Ingredients> ingredients = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -106,4 +112,13 @@ public class Recipies {
     public void setNotes(Notes notes) {
         this.notes = notes;
     }
+
+    public Set<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
 }
