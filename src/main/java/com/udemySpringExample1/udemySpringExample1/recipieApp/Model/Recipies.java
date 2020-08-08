@@ -1,5 +1,7 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Model;
 
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Constants.Difficulty;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +34,23 @@ public class Recipies {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipies")
     Set<Ingredients> ingredients = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "recipies_categories",
+            joinColumns = @JoinColumn(name = "recipies_id"),
+            inverseJoinColumns = @JoinColumn(name = "categories_id"))
+    Set<Categories> categories = new HashSet<>();
+
+    @Enumerated(value = EnumType.STRING)
+    private Difficulty difficulty;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 
     public Long getId() {
         return id;
