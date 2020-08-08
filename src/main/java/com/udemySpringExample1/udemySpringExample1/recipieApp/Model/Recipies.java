@@ -140,4 +140,11 @@ public class Recipies {
         this.ingredients = ingredients;
     }
 
+    public Set<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Categories> categories) {
+        this.categories = categories;
+    }
 }
