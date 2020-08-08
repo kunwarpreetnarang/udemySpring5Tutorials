@@ -6,6 +6,30 @@
 </head>
 <body>
 <h1 th:text="Recipie">Recipie:</h1>
-
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="recipe : ${recipies}">
+        <td th:text="${recipe.id}">123</td>
+        <td th:text="${recipe.description}">Tasty Goodnees</td>
+    </tr>
+</table>
+<hr>
+<table style="border: solid 2px springgreen">
+    <tr>
+        <th>ID</th>
+        <th>Directions</th>
+        <th>Difficulty</th>
+        <th>Notes</th>
+    </tr>
+    <tr th:each="recipe : ${recipies}">
+        <td th:text="${recipe.id}">123</td>
+        <td th:text="${recipe.directions}">Tasty Goodnees</td>
+        <td th:text="${recipe.difficulty}">dsijsfiosj</td>
+        <td th:text="${recipe.notes.recipieNotes}">Notes</td>
+    </tr>
+</table>
 </body>
 </html>

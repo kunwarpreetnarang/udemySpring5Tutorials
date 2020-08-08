@@ -20,6 +20,7 @@ public class Recipies {
 
     private String url;
 
+    @Lob
     private String directions;
 
     private int cookTime;

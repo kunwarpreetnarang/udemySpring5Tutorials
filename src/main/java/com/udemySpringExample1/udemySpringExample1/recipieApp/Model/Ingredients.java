@@ -23,6 +23,17 @@ public class Ingredients {
     @OneToOne
     private UnitOfMeasure unitOfMeasure;
 
+    public Ingredients(){
+
+    }
+
+    public Ingredients(String description, long amount, UnitOfMeasure unitOfMeasure, Recipies recipies ) {
+        this.description = description;
+        this.amount = amount;
+        this.recipies = recipies;
+        this.unitOfMeasure = unitOfMeasure;
+    }
+
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
     }
