@@ -1,13 +1,13 @@
-package com.udemySpringExample1.udemySpringExample1.Controller;
+package com.udemySpringExample1.udemySpringExample1.udemystudent.Controller;
 
-import com.udemySpringExample1.udemySpringExample1.Model.Teacher;
-import com.udemySpringExample1.udemySpringExample1.Repositories.TeacherRepository;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.TeacherRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@Slf4j
 public class TeacherController {
     private  final TeacherRepository teacherRepository;
 
@@ -17,6 +17,7 @@ public class TeacherController {
 
     @RequestMapping("/teacher-list")
     public String getTeachers(Model model){
+        log.debug("fetching teachers list");
         model.addAttribute("teachers", teacherRepository.findAll());
         return "teachers/teachers-list";
     }

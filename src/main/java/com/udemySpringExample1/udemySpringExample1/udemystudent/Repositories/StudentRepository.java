@@ -1,6 +1,6 @@
-package com.udemySpringExample1.udemySpringExample1.Repositories;
+package com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories;
 
-import com.udemySpringExample1.udemySpringExample1.Model.Student;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Student;
 import org.springframework.data.repository.CrudRepository;
 
 /**
