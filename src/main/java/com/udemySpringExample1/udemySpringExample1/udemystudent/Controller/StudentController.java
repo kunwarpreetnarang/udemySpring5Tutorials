@@ -17,7 +17,7 @@ public class StudentController {
 
     @RequestMapping("/student-list")
     public String getStudentList(Model model){
-        log.debug("Fetching student List:");
+        log.info("Fetching student List");
         model.addAttribute("students",studentRepository.findAll());
         return("students/students-list");
     }

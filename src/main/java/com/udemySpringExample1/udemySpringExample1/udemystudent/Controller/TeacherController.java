@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
 @Slf4j
+@Controller
 public class TeacherController {
     private  final TeacherRepository teacherRepository;
 
@@ -17,7 +17,7 @@ public class TeacherController {
 
     @RequestMapping("/teacher-list")
     public String getTeachers(Model model){
-        log.debug("fetching teachers list");
+        log.info("fetching teachers list");
         model.addAttribute("teachers", teacherRepository.findAll());
         return "teachers/teachers-list";
     }
