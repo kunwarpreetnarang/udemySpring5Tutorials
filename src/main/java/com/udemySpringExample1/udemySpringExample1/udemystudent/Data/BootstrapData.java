@@ -1,11 +1,11 @@
-package com.udemySpringExample1.udemySpringExample1.Data;
+package com.udemySpringExample1.udemySpringExample1.udemystudent.Data;
 
-import com.udemySpringExample1.udemySpringExample1.Model.Subject;
-import com.udemySpringExample1.udemySpringExample1.Repositories.StudentRepository;
-import com.udemySpringExample1.udemySpringExample1.Repositories.SubjectRepository;
-import com.udemySpringExample1.udemySpringExample1.Repositories.TeacherRepository;
-import com.udemySpringExample1.udemySpringExample1.Model.Student;
-import com.udemySpringExample1.udemySpringExample1.Model.Teacher;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Subject;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.StudentRepository;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.SubjectRepository;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.TeacherRepository;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Student;
+import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Teacher;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -60,6 +60,7 @@ public class BootstrapData implements CommandLineRunner {
             sub2.getStudent().add(s2);
             sub1.getStudent().add(s2);
             sub2.getStudent().add(s1);
+            t1.setTeacherName("wiojr");
 
         } catch (Exception e) {
             e.printStackTrace();
