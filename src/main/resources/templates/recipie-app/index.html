@@ -3,27 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Time-leaf template</title>
-</head>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script></head>
 <body>
 <h1 th:text="Recipie">Recipie:</h1>
-<table>
+<table class="table table-striped table-border table-hover" >
+    <thead class="thead-dark">
     <tr>
         <th>ID</th>
         <th>Description</th>
     </tr>
-    <tr th:each="recipe : ${recipies}">
+    </thead>
+    <tr th:each="recipe : ${recipies}" class="">
         <td th:text="${recipe.id}">123</td>
         <td th:text="${recipe.description}">Tasty Goodnees</td>
     </tr>
 </table>
 <hr>
-<table style="border: solid 2px springgreen">
-    <tr>
+<h1 class="f4 bg-near-black white mv0 pv2 ph3">Recipe Details</h1>
+<table style="border: solid 2px springgreen" class="table table-striped table hover">
+    <thead class="thead-dark"><tr>
         <th>ID</th>
         <th>Directions</th>
         <th>Difficulty</th>
         <th>Notes</th>
     </tr>
+    </thead>
     <tr th:each="recipe : ${recipies}">
         <td th:text="${recipe.id}">123</td>
         <td th:text="${recipe.directions}">Tasty Goodnees</td>

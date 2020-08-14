@@ -14,12 +14,10 @@ import java.util.Optional;
 public class IndexController {
     private final CategoryRepository categoryRepository;
     private final RecipieService recipieService;
-    private final UnitOfMeasureRepository unitOfMeasureRepository;
 
     @Autowired
-    public IndexController(CategoryRepository categoryRepository, RecipieService recipieService, UnitOfMeasureRepository unitOfMeasureRepository) {
+    public IndexController(CategoryRepository categoryRepository, RecipieService recipieService) {
         this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.recipieService = recipieService;
     }
 
