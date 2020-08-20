@@ -23,4 +23,10 @@ public class RecipieServiceImpl implements RecipieService {
         recipieRepository.findAll().iterator().forEachRemaining(recipieSet::add);
         return recipieSet;
     }
+
+    @Override
+    public Recipies getRecipieById(Long recipeieId) {
+        Recipies recipie = recipieRepository.findById(recipeieId).orElse(null);
+        return recipie;
+    }
 }
