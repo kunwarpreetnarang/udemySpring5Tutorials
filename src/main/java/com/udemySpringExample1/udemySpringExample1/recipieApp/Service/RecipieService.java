@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface RecipieService {
     public List<Recipies> getRecipies();
+
+    public Recipies getRecipieById(Long recipeieId);
 }
