@@ -131,6 +131,7 @@ public class Recipies {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+        //notes.setRecipies(this);
     }
 
     public Set<Ingredients> getIngredients() {
