@@ -9,7 +9,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -24,7 +23,7 @@ public class RecipieServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipieService = new RecipieServiceImpl(recipieRepository);
+        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter);
     }
 
     @Test
