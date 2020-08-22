@@ -46,4 +46,10 @@ public class RecipieServiceImpl implements RecipieService {
         Recipies savedRecipie = recipieRepository.save(recipies);
         return recipiesConverter.convert(savedRecipie);
     }
+
+    @Transactional
+    @Override
+    public RecipiesDO findRecipieDoById(Long id) {
+        return recipiesConverter.convert(getRecipieById(id));
+    }
 }
