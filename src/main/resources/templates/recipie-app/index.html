@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Time-leaf template</title>
+    <title>Recipe App</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
@@ -20,14 +20,15 @@
         <th>Description</th>
         <th>View</th>
         <th>Update</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tr th:each="recipe : ${recipies}" class="">
         <td th:text="${recipe.id}">123</td>
         <td th:text="${recipe.description}">Tasty Goodnees</td>
-        <td><a href="#" th:href="@{'/recipie/show/' + ${recipe.id}}">Click for more details !</a></td>
-        <td><a href="#" th:href="@{'/recipie/update/' + ${recipe.id}}"><i class="fa fa-edit">Edit</i></a></td>
-<!--        <td><i class="fas fa-trash"></i></td>-->
+        <td><a href="#" th:href="@{'/recipie/show/'   +  ${recipe.id}}">Click for more details !</a></td>
+        <td><a href="#" th:href="@{'/recipie/update/' +  ${recipe.id}}"><i class="fa fa-edit">Edit</i></a></td>
+        <td><a href="#" th:href="@{'/recipie/delete/'  +  ${recipe.id}}"><i class="fa fa-trash">Delete</i></a></td>
     </tr>
 </table>
 <p>
