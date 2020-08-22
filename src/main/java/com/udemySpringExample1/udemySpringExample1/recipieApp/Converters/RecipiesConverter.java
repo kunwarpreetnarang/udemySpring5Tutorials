@@ -32,6 +32,7 @@ public class RecipiesConverter implements Converter<Recipies, RecipiesDO> {
         recipiesDO.setSource(recipies.getSource());
         recipiesDO.setUrl(recipies.getUrl());
         recipiesDO.setNotesDO(notesConverter.convert(recipies.getNotes()));
+        recipiesDO.setDirections(recipies.getDirections());
 
         if (recipies.getCategories() != null && recipies.getCategories().size() > 0){
             recipies.getCategories()

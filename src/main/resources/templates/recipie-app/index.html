@@ -23,8 +23,11 @@
     <tr th:each="recipe : ${recipies}" class="">
         <td th:text="${recipe.id}">123</td>
         <td th:text="${recipe.description}">Tasty Goodnees</td>
-        <td><a href="#" th:href="@{'/recipie/show/' + ${recipe.id}}">Click Here!!</a></td>
+        <td><a href="#" th:href="@{'/recipie/show/' + ${recipe.id}}">Click for more details !</a></td>
     </tr>
 </table>
+<p>
+    <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-navy" href="#" th:href="@{'/addRecipe'}">Add new Recipe!</a>
+</p>
 </body>
 </html>

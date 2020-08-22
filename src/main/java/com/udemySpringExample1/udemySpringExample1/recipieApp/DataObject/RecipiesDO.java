@@ -22,4 +22,5 @@ public class RecipiesDO {
     Set<IngredientsDO> ingredientsDO = new HashSet<>();
     Set<CategoryDO> categoryDO = new HashSet<>();
     Difficulty difficulty;
+    String directions;
 }
