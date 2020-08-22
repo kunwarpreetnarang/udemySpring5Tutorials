@@ -32,6 +32,7 @@ public class RecipiesDoConverter implements Converter<RecipiesDO, Recipies> {
         recipies.setDifficulty(recipiesDO.getDifficulty());
         recipies.setPrepTime(recipiesDO.getPreparationTime());
         recipies.setNotes(notesDoConverter.convert(recipiesDO.getNotesDO()));
+        recipies.setDirections(recipiesDO.getDirections());
 
         if (recipiesDO.getCategoryDO() != null && recipiesDO.getCategoryDO().size() > 0){
             recipiesDO.getCategoryDO()
