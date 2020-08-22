@@ -8,10 +8,8 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Optional;
 
 @Controller
@@ -47,9 +45,15 @@ public class IndexController {
     }
 
     @PostMapping("/saveRecipie")
-    public String saveOrUpdateRecipie(@ModelAttribute RecipiesDO recipiesDO){
+    public String saveRecipie(@ModelAttribute RecipiesDO recipiesDO){
         RecipiesDO savedDO = recipieService.saveRecipie(recipiesDO);
         return "redirect:/recipie/show/" + savedDO.getRecipieId();
+    }
+
+    @RequestMapping("/recipie/update/{id}")
+    public String updateRecipie(@PathVariable String id, Model model){
+        model.addAttribute("recipeForm", recipieService.findRecipieDoById(Long.valueOf(id)));
+        return "recipie-app/save-recipe";
     }
 }
 

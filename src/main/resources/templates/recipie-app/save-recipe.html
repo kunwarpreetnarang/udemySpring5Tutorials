@@ -15,7 +15,7 @@
         <div class="col-md-6 col-md-offset-3">
             <form class="pa4 black-80" th:object="${recipeForm}" th:action="@{/saveRecipie/}" th:method="POST">
                 <input type="hidden" th:field="*{recipieId}"/>
-                <div class="pannel-group">
+                <div class="panel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h1 class="panel-title">Edit Recipe Information</h1>
@@ -54,11 +54,17 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}" >
+                                        <option th:value="${difficulty}">Easy</option>
+                                        <option th:value="${difficulty}">Medium</option>
+                                        <option th:value="${difficulty}">Hard</option>
                                     </select>
+<!--
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="difficultyValue:${T(com.spring.radek.recipeproject.domain.Difficulty).values()}"
+                                                th:value="${difficultyValue.name()}"
+                                                th:text="${difficultyValue.name()}">val</option>
+-->
                                 </div>
                             </div>
                             <div class="row">
@@ -91,11 +97,9 @@
                                     <ul>
                                         <li th:remove="all">1 Cup of milk</li>
                                         <li th:remove="all">1 Teaspoon of chocolate</li>
-                                        <li th:each="ingredient : ${recipeForm.ingredientsDO}"
-                                            th:text="${(ingredientsDO.getAmount()
-                                            + ' - ' + ingredientsDO.unitOfMeasureDO.getUom()
-                                            + ' - ' + ingredientsDO.getDescription())}">1 Teaspoon of Sugar
-                                        </li>
+<!--                                        <li th:each="ingredient : ${recipeForm.ingredientsDO}"-->
+<!--                                            th:text="${ingredientsDO.getAmount()}">1 Teaspoon of Sugar-->
+<!--                                        </li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -130,6 +134,9 @@
             </form>
         </div>
     </div>
+    <p>
+        <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-navy" href="#" th:href="@{'/index'}"> Return to Home </a>
+    </p>
 </div>
 </body>
 </html>

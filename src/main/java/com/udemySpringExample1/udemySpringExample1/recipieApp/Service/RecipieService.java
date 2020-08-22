@@ -11,4 +11,6 @@ public interface RecipieService {
     public Recipies getRecipieById(Long recipeieId);
 
     public RecipiesDO saveRecipie(RecipiesDO recipiesDO);
+
+    public RecipiesDO findRecipieDoById(Long id);
 }
