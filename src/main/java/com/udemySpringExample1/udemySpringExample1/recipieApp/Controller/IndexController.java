@@ -57,5 +57,11 @@ public class IndexController {
         model.addAttribute("recipeForm", recipieService.findRecipieDoById(Long.valueOf(id)));
         return "recipie-app/save-recipe";
     }
+
+    @RequestMapping("/recipie/delete/{id}")
+    public String deleteRecipie(@PathVariable String id, Model model){
+        model.addAttribute("recipies", recipieService.deleteRecipies(Long.valueOf(id)));
+        return "redirect:/index";
+    }
 }
 

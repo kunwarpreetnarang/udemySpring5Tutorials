@@ -13,4 +13,6 @@ public interface RecipieService {
     public RecipiesDO saveRecipie(RecipiesDO recipiesDO);
 
     public RecipiesDO findRecipieDoById(Long id);
+
+    public RecipiesDO deleteRecipies(Long id);
 }

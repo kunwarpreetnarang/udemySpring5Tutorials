@@ -52,4 +52,12 @@ public class RecipieServiceImpl implements RecipieService {
     public RecipiesDO findRecipieDoById(Long id) {
         return recipiesConverter.convert(getRecipieById(id));
     }
+
+    @Transactional
+    @Override
+    public RecipiesDO deleteRecipies(Long id) {
+        RecipiesDO recipiesDO = recipiesConverter.convert(getRecipieById(id));
+        recipieRepository.deleteById(id);
+        return recipiesDO;
+    }
 }
