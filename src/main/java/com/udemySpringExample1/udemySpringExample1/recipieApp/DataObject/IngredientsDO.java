@@ -13,4 +13,5 @@ public class IngredientsDO {
     String description;
     Long amount;
     UnitOfMeasureDO unitOfMeasureDO;
+    Long recipieId;
 }

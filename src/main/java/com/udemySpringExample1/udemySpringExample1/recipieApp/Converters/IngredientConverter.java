@@ -25,6 +25,8 @@ public class IngredientConverter implements Converter<Ingredients, IngredientsDO
         ingredientsDO.setId(ingredients.getId());
         ingredientsDO.setAmount(ingredients.getAmount());
         ingredientsDO.setUnitOfMeasureDO(unitOfMeasureConverter.convert(ingredients.getUnitOfMeasure()));
+        ingredientsDO.setDescription(ingredients.getDescription());
+        ingredientsDO.setRecipieId(ingredients.getRecipies().getId());
         return ingredientsDO;
     }
 }

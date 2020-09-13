@@ -1,5 +1,7 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Service.impl;
 
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientConverter;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientDoConverter;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesConverter;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesDoConverter;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Recipies;
@@ -8,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,10 +31,16 @@ public class RecipieServiceImplTest {
     @Mock
     RecipiesConverter recipiesConverter;
 
+    @Mock
+    IngredientDoConverter ingredientDoConverter;
+
+    @Mock
+    IngredientConverter ingredientConverter;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter);
+        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter, ingredientDoConverter);
     }
 
     @Test
