@@ -23,15 +23,13 @@ public class RecipieServiceImpl implements RecipieService {
     private final RecipieRepository recipieRepository;
     private final RecipiesConverter recipiesConverter;
     private final RecipiesDoConverter recipiesDoConverter;
-    private final IngredientDoConverter ingredientDoConverter;
     private final IngredientConverter ingredientConverter;
 
-    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter, IngredientDoConverter ingredientDoConverter) {
+    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter) {
         this.recipieRepository = recipieRepository;
         this.recipiesConverter = recipiesConverter;
         this.recipiesDoConverter = recipiesDoConverter;
         this.ingredientConverter = ingredientConverter;
-        this.ingredientDoConverter = ingredientDoConverter;
     }
 
     @Override
@@ -77,9 +75,25 @@ public class RecipieServiceImpl implements RecipieService {
                 .filter(ingredients -> ingredients.getId().equals(id))
                 .map(ingredients -> ingredientConverter.convert(ingredients)).findFirst();
 
-        if(!ingredientsDO.isPresent()){
+        if (!ingredientsDO.isPresent()) {
 
         }
         return ingredientsDO.get();
+    }
+
+    @Override
+    public void deleteIngredient(Long recipieId, Long id) {
+        Recipies recipies = getRecipieById(recipieId);
+        Optional<Ingredients> ingredients = recipies.getIngredients().stream()
+                .filter(ingredients1 -> ingredients1.getId().equals(id)).findFirst();
+
+        if (ingredients.isPresent()) {
+            Ingredients ingredients1 = ingredients.get();
+            ingredients1.setRecipies(null);
+            recipies.getIngredients().remove(ingredients.get());
+            recipieRepository.save(recipies);
+        } else {
+            //todo handle exception
+        }
     }
 }
