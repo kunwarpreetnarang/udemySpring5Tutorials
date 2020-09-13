@@ -63,5 +63,17 @@ public class IndexController {
         model.addAttribute("recipies", recipieService.deleteRecipies(Long.valueOf(id)));
         return "redirect:/index";
     }
+
+    @RequestMapping("/recipie/ingredient/{id}")
+    public String getIngredient(@PathVariable String id, Model model){
+        model.addAttribute("recipie", recipieService.findRecipieDoById(Long.valueOf(id)));
+        return "recipie-app/list-ingredient";
+    }
+
+    @RequestMapping("/recipie/{recipieId}/show/ingredient/{id}")
+    public String viewIngredient(@PathVariable String recipieId, Model model, @PathVariable String id){
+        model.addAttribute("ingredient", recipieService.findIngredientById(Long.valueOf(recipieId),Long.valueOf(id)));
+        return "recipie-app/show-ingredient";
+    }
 }
 
