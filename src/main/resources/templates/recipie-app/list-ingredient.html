@@ -30,7 +30,7 @@
         <td th:text="${ingredient.getDescription()}"></td>
         <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/show/ingredient/'   +  ${ingredient.id}}">Click for more details !</a></td>
         <td><a href="#" th:href="@{'/recipie/update/ingredient/' +  ${ingredient.id}}"><i class="fa fa-edit">Edit</i></a></td>
-        <td><a href="#" th:href="@{'/recipie/delete/ingredient/'  +  ${ingredient.id}}"><i class="fa fa-trash">Delete</i></a></td>
+        <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/delete/ingredient/'  +  ${ingredient.id}}"><i class="fa fa-trash">Delete</i></a></td>
     </tr>
 </table>
 </body>

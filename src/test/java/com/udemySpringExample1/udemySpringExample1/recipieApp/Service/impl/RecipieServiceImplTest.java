@@ -32,15 +32,12 @@ public class RecipieServiceImplTest {
     RecipiesConverter recipiesConverter;
 
     @Mock
-    IngredientDoConverter ingredientDoConverter;
-
-    @Mock
     IngredientConverter ingredientConverter;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter, ingredientDoConverter);
+        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter);
     }
 
     @Test

@@ -75,5 +75,11 @@ public class IndexController {
         model.addAttribute("ingredient", recipieService.findIngredientById(Long.valueOf(recipieId),Long.valueOf(id)));
         return "recipie-app/show-ingredient";
     }
+
+    @RequestMapping("/recipie/{recipieId}/delete/ingredient/{id}")
+    public String deleteIngredient(@PathVariable String recipieId, @PathVariable String id){
+        recipieService.deleteIngredient(Long.valueOf(recipieId),Long.valueOf(id));
+        return "redirect:/recipie/show/" + recipieId;
+    }
 }
 

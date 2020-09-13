@@ -19,4 +19,6 @@ public interface RecipieService {
     public RecipiesDO deleteRecipies(Long id);
 
     public IngredientsDO findIngredientById(Long recipieId, Long id);
+
+    public void deleteIngredient(Long recipieId, Long id);
 }
