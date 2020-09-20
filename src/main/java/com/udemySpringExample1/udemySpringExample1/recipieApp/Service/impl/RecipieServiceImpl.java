@@ -1,35 +1,49 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Service.impl;
 
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientDoConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesDoConverter;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.*;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.CategoryDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.RecipiesDO;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Ingredients;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Recipies;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.IngredientRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.RecipieRepository;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.UnitOfMeasureRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class RecipieServiceImpl implements RecipieService {
 
     private final RecipieRepository recipieRepository;
+    private final IngredientRepository ingredientRepository;
+    private final UnitOfMeasureRepository unitOfMeasureRepository;
+    private final CategoryRepository categoryRepository;
     private final RecipiesConverter recipiesConverter;
     private final RecipiesDoConverter recipiesDoConverter;
     private final IngredientConverter ingredientConverter;
+    private final IngredientDoConverter ingredientDoConverter;
+    private final UnitOfMeasureConverter unitOfMeasureConverter;
+    private final CategoryConverter categoryConverter;
 
-    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter) {
+    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter, IngredientDoConverter ingredientDoConverter, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureConverter unitOfMeasureConverter, CategoryRepository categoryRepository, CategoryConverter categoryConverter) {
         this.recipieRepository = recipieRepository;
         this.recipiesConverter = recipiesConverter;
         this.recipiesDoConverter = recipiesDoConverter;
         this.ingredientConverter = ingredientConverter;
+        this.ingredientDoConverter = ingredientDoConverter;
+        this.ingredientRepository = ingredientRepository;
+        this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.unitOfMeasureConverter = unitOfMeasureConverter;
+        this.categoryRepository = categoryRepository;
+        this.categoryConverter = categoryConverter;
     }
 
     @Override
@@ -81,6 +95,7 @@ public class RecipieServiceImpl implements RecipieService {
         return ingredientsDO.get();
     }
 
+    @Transactional
     @Override
     public void deleteIngredient(Long recipieId, Long id) {
         Recipies recipies = getRecipieById(recipieId);
@@ -96,4 +111,26 @@ public class RecipieServiceImpl implements RecipieService {
             //todo handle exception
         }
     }
+
+    @Override
+    public IngredientsDO saveIngredient(IngredientsDO ingredientsDO, Long recipieId) {
+        Ingredients ingredients = new Ingredients();
+        ingredients = ingredientDoConverter.convert(ingredientsDO);
+        Recipies recipies = new Recipies();
+        recipies.setId(recipieId);
+        ingredients.setRecipies(recipies);
+        ingredients.setUnitOfMeasure(unitOfMeasureRepository
+                .findById(ingredientsDO.getUnitOfMeasureDO().getUomId())
+                .orElseThrow(() -> new RuntimeException("UOM NOT FOUND")));
+        ingredientRepository.save(ingredients);
+        return ingredientConverter.convert(ingredients);
+    }
+
+    @Override
+    public Set<UnitOfMeasureDO> listAllUOM() {
+        return StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
+                                                .map(unitOfMeasureConverter::convert)
+                                                .collect(Collectors.toSet());
+    }
+
 }

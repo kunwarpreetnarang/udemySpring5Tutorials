@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        :required{
+            box-shadow: 4px 4px 20px rgba(200, 0, 0, 0.85);
+        }
+
+        .form-group.required .control-label:after {
+            content:"*";
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form class="pa4 black-80" th:object="${ingredientForm}" th:action="@{'/saveIngredient/' + ${ingredientForm.getRecipieId()}}" th:method="POST">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Edit Ingredient Information</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-5 form-group">
+                                    <label class="control-label">Ingredient Description:</label>
+                                    <input type="text" class="form-control" th:field="*{description}" required/>
+                                </div>
+
+                                <div class="col-md-5 form-group">
+                                    <label class="control-label">Ingredient Amount:</label>
+                                    <input type="number" class="form-control" th:field="*{amount}" required/>
+                                </div>
+                                <div class="col-md-5 form-group">
+                                    <label class="control-label">UOM:</label>
+                                    <select class="form-control" name="uom.uomId" th:field="*{unitOfMeasureDO.uomId}">
+                                      <option th:each="uomEach : ${uomList}"
+                                              th:value="${uomEach.uomId}"
+                                              th:selected="${uomEach.uomId.equals(ingredientForm.unitOfMeasureDO.uomId)}"
+                                              th:text="${uomEach.uom}">Each</option>
+                                    </select>
+<!--                                    <select class="form-control" th:field="*{difficulty}">-->
+<!--                                        <option th:each="difficultyValue:${T(com.udemySpringExample1.udemySpringExample1.recipieApp.Constants.Difficulty).values()}"-->
+<!--                                                th:value="${difficultyValue.name()}"-->
+<!--                                                th:text="${difficultyValue.name()}">val</option>-->
+<!--                                    </select>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary f6 link dim br-pill ph3 pv2 mb2 dib white bg-navy">Submit</button>
+            </form>
+        </div>
+    </div>
+    <p>
+        <a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-navy" href="#" th:href="@{'/index'}"> Return to Home </a>
+    </p>
+</div>
+</body>
+</html>

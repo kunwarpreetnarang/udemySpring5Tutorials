@@ -1,11 +1,11 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Service.impl;
 
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.IngredientDoConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesConverter;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.RecipiesDoConverter;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.*;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Recipies;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.IngredientRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.RecipieRepository;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.UnitOfMeasureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -34,10 +34,29 @@ public class RecipieServiceImplTest {
     @Mock
     IngredientConverter ingredientConverter;
 
+    @Mock
+    IngredientDoConverter ingredientDoConverter;
+
+    @Mock
+    IngredientRepository ingredientRepository;
+
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
+
+    @Mock
+    UnitOfMeasureConverter unitOfMeasureConverter;
+
+    @Mock
+    CategoryRepository categoryRepository;
+
+    @Mock
+    CategoryConverter categoryConverter;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter);
+        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter, ingredientDoConverter, ingredientRepository, unitOfMeasureRepository, unitOfMeasureConverter, categoryRepository, categoryConverter
+        );
     }
 
     @Test

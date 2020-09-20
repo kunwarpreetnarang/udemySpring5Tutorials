@@ -1,9 +1,10 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Controller;
 
+import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.RecipiesDO;
+import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Categories;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.UnitOfMeasureRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,6 +81,32 @@ public class IndexController {
     public String deleteIngredient(@PathVariable String recipieId, @PathVariable String id){
         recipieService.deleteIngredient(Long.valueOf(recipieId),Long.valueOf(id));
         return "redirect:/recipie/show/" + recipieId;
+    }
+
+    @RequestMapping("/addIngredient/{recipieId}")
+    public String getIngredientForm(Model model, @PathVariable String recipieId){
+        IngredientsDO ingredientsDO = new IngredientsDO();
+        ingredientsDO.setRecipieId(Long.valueOf(recipieId));
+        model.addAttribute("ingredientForm", ingredientsDO);
+        ingredientsDO.setUnitOfMeasureDO(new UnitOfMeasureDO());
+
+        model.addAttribute("uomList", recipieService.listAllUOM());
+
+        return "recipie-app/save-ingredient";
+    }
+
+    @PostMapping("/saveIngredient/{recipieId}")
+    public String saveIngredient(@ModelAttribute IngredientsDO ingredientsDO, @PathVariable String recipieId){
+        IngredientsDO savedDO = recipieService.saveIngredient(ingredientsDO, Long.valueOf(recipieId));
+        return "redirect:/recipie/ingredient/" + savedDO.getRecipieId();
+    }
+
+    @RequestMapping("/recipie/{recipieId}/update/ingredient/{id}")
+    public String updateIngredient(@PathVariable String recipieId, @PathVariable String id, Model model){
+        model.addAttribute("ingredientForm", recipieService.findIngredientById(Long.valueOf(recipieId),Long.valueOf(id)));
+        model.addAttribute("uomList", recipieService.listAllUOM());
+
+        return "recipie-app/save-ingredient";
     }
 }
 
