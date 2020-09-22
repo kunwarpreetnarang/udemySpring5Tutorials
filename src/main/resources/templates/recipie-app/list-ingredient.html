@@ -28,10 +28,12 @@
         <td th:text="${ingredient.getAmount()}">Tasty Goodnees</td>
         <td th:text="${ingredient.unitOfMeasureDO.getUom()}"></td>
         <td th:text="${ingredient.getDescription()}"></td>
-        <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/show/ingredient/'   +  ${ingredient.id}}">Click for more details !</a></td>
-        <td><a href="#" th:href="@{'/recipie/update/ingredient/' +  ${ingredient.id}}"><i class="fa fa-edit">Edit</i></a></td>
+        <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/show/ingredient/'    +  ${ingredient.id}}">Click for more details !</a></td>
+        <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/update/ingredient/'  +  ${ingredient.id}}"><i class="fa fa-edit">Edit</i></a></td>
         <td><a href="#" th:href="@{'/recipie/' + ${ingredient.recipieId} + '/delete/ingredient/'  +  ${ingredient.id}}"><i class="fa fa-trash">Delete</i></a></td>
     </tr>
 </table>
+<a class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-navy" href="#" th:href="@{'/addIngredient/' + ${recipie.recipieId}}">Add new Ingredient!</a>
+
 </body>
 </html>
