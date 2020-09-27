@@ -23,4 +23,5 @@ public class RecipiesDO {
     Set<CategoryDO> categoryDO = new HashSet<>();
     Difficulty difficulty;
     String directions;
+    Byte[] images;
 }

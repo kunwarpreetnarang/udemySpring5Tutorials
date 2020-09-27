@@ -6,13 +6,22 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfM
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Categories;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 @Controller
@@ -48,8 +57,9 @@ public class IndexController {
     }
 
     @PostMapping("/saveRecipie")
-    public String saveRecipie(@ModelAttribute RecipiesDO recipiesDO){
+    public String saveRecipie(@ModelAttribute RecipiesDO recipiesDO, @RequestParam("imagefile") MultipartFile file){
         RecipiesDO savedDO = recipieService.saveRecipie(recipiesDO);
+        savedDO = recipieService.saveRecipeImage(file, savedDO.getRecipieId());
         return "redirect:/recipie/show/" + savedDO.getRecipieId();
     }
 
@@ -107,6 +117,26 @@ public class IndexController {
         model.addAttribute("uomList", recipieService.listAllUOM());
 
         return "recipie-app/save-ingredient";
+    }
+
+    @GetMapping("recipe/{id}/recipeimage")
+    public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
+        if (!id.equals("null") || id != null) {
+            RecipiesDO recipeCommand = recipieService.findRecipieDoById(Long.valueOf(id));
+
+            if (recipeCommand.getImages() != null) {
+                byte[] byteArray = new byte[recipeCommand.getImages().length];
+                int i = 0;
+
+                for (Byte wrappedByte : recipeCommand.getImages()) {
+                    byteArray[i++] = wrappedByte; //auto unboxing
+                }
+
+                response.setContentType("image/jpeg");
+                InputStream is = new ByteArrayInputStream(byteArray);
+                IOUtils.copy(is, response.getOutputStream());
+            }
+        }
     }
 }
 
