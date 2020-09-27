@@ -17,6 +17,7 @@
 <h1 th:text="${recipie.description}"></h1>
 <table style="border: solid 2px springgreen" class="table table-striped table hover">
     <thead class="thead-dark"><tr>
+        <th>Recipe Image</th>
         <th>ID</th>
         <th>Difficulty</th>
         <th>Prep. Time</th>
@@ -25,11 +26,16 @@
     </tr>
     </thead>
     <tr>
+        <td>
+            <img src="../../static/images/guacamole400x400WithX.jpg"
+                 th:src="@{'/recipe/' + ${recipie.id} + '/recipeimage'}"
+                 width="200" height="200">
+        </td>
         <td th:text="${recipie.id}">123</td>
         <td th:text="${recipie?.difficulty}">difficulty</td>
         <td th:text="${recipie?.prepTime}">Servings</td>
         <td th:text="${recipie?.source}">Source</td>
-        <td th:text="${recipie?.description}">URL</td>
+        <td th:text="${recipie?.url}">URL</td>
     </tr>
 </table>
 

@@ -4,8 +4,8 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.Categor
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.RecipiesDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Ingredients;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Recipies;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -29,4 +29,6 @@ public interface RecipieService {
 
     public Set<UnitOfMeasureDO> listAllUOM();
 
+    public RecipiesDO saveRecipeImage(MultipartFile multipartFile, long id);
 }
+

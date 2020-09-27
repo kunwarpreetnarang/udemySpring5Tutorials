@@ -14,7 +14,9 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.UnitOfM
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -133,4 +135,20 @@ public class RecipieServiceImpl implements RecipieService {
                                                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public RecipiesDO saveRecipeImage(MultipartFile multipartFile, long id) {
+        try {
+            Recipies recipies = recipieRepository.findById(id).orElse(null);
+            Byte[] bytes= new Byte[multipartFile.getBytes().length];
+            int i = 0;
+            for(byte b: multipartFile.getBytes())
+            bytes[i++] = b;
+            recipies.setImages(bytes);
+            Recipies saveRecipie = recipieRepository.save(recipies);
+            return recipiesConverter.convert(saveRecipie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
