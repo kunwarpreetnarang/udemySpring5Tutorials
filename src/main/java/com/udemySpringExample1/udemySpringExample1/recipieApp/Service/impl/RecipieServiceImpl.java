@@ -1,5 +1,6 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Service.impl;
 
+import com.udemySpringExample1.udemySpringExample1.recipieApp.Controller.NotFoundException;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.*;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.CategoryDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
@@ -58,6 +59,9 @@ public class RecipieServiceImpl implements RecipieService {
     @Override
     public Recipies getRecipieById(Long recipeieId) {
         Recipies recipie = recipieRepository.findById(recipeieId).orElse(null);
+        if(recipie == null){
+            throw new NotFoundException("Recipe Not Found. For Recipie ID: " + recipeieId.toString());
+        }
         return recipie;
     }
 
