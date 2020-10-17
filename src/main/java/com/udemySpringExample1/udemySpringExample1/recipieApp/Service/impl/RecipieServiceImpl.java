@@ -60,7 +60,7 @@ public class RecipieServiceImpl implements RecipieService {
     public Recipies getRecipieById(Long recipeieId) {
         Recipies recipie = recipieRepository.findById(recipeieId).orElse(null);
         if(recipie == null){
-            throw new NotFoundException("Recipe Not Found");
+            throw new NotFoundException("Recipe Not Found. For Recipie ID: " + recipeieId.toString());
         }
         return recipie;
     }
