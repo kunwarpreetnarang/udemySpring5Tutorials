@@ -6,6 +6,7 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfM
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Categories;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 
+@Slf4j
 @Controller
 public class IndexController {
     private final CategoryRepository categoryRepository;
@@ -147,6 +149,7 @@ public class IndexController {
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFound(Exception e){
         String notFoundResponse = "404 ERROR NOT FOUND !!";
+        log.error("error not found", e);
         return genericExceptionHandler(notFoundResponse, e);
     }
 
@@ -154,6 +157,7 @@ public class IndexController {
     @ExceptionHandler(NumberFormatException.class)
     public ModelAndView handleBadRequest(Exception e){
         String badRequestResponse = "400 BAD REQUEST !!";
+        log.error("bad request found", e);
         return genericExceptionHandler(badRequestResponse, e);
     }
 
