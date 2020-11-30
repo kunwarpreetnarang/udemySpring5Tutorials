@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +65,15 @@ public class IndexController {
     }
 
     @PostMapping("/saveRecipie")
-    public String saveRecipie(@ModelAttribute RecipiesDO recipiesDO, @RequestParam("imagefile") MultipartFile file){
+    public String saveRecipie(@Valid @ModelAttribute("recipeForm") RecipiesDO recipiesDO, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file){
+        if(bindingResult.hasErrors()){
+
+            bindingResult.getAllErrors().forEach(objectError -> {
+                log.debug(objectError.toString());
+            });
+
+            return "recipie-app/save-recipe";
+        }
         RecipiesDO savedDO = recipieService.saveRecipie(recipiesDO);
         savedDO = recipieService.saveRecipeImage(file, savedDO.getRecipieId());
         return "redirect:/recipie/show/" + savedDO.getRecipieId();
