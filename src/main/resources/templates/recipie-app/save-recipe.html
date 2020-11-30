@@ -9,13 +9,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        :required{
+/*        :required{
             box-shadow: 4px 4px 20px rgba(200, 0, 0, 0.85);
         }
 
         .form-group.required .control-label:after {
             content:"*";
             color:red;
+        }*/
+
+        .help-block{
+            color: maroon;
         }
     </style>
 </head>
@@ -127,7 +131,13 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <textarea required class="form-control" rows="3" th:field="*{directions}"></textarea></div>
+                                    <textarea  class="form-control" rows="3" th:field="*{directions}"></textarea>
+                                    <span class="help-block" th:if="${#fields.hasErrors('directions')}">
+                                        <ul>
+                                            <li th:each="err : ${#fields.errors('directions')}" th:text="${err}"/>
+                                        </ul>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>

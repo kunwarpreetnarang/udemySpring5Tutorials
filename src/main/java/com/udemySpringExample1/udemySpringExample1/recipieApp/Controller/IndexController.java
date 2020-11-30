@@ -65,7 +65,7 @@ public class IndexController {
     }
 
     @PostMapping("/saveRecipie")
-    public String saveRecipie( @ModelAttribute("recipeForm") @Valid RecipiesDO recipiesDO, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file){
+    public String saveRecipie(@Valid @ModelAttribute("recipeForm") RecipiesDO recipiesDO, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file){
         if(bindingResult.hasErrors()){
 
             bindingResult.getAllErrors().forEach(objectError -> {
