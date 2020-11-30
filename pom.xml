@@ -19,6 +19,9 @@
 		<additionalparam>-Xdoclint:none</additionalparam>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		<sonar.projectKey>kunwarpreetnarang_udemySpring5Tutorials</sonar.projectKey>
+		<sonar.organization>kunwarpreetnarang</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
 	<dependencies>
