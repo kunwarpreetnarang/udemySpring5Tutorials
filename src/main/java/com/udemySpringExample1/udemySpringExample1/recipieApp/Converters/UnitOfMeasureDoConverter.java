@@ -12,8 +12,9 @@ public class UnitOfMeasureDoConverter implements Converter<UnitOfMeasureDO, Unit
     @Nullable
     @Override
     public UnitOfMeasure convert(UnitOfMeasureDO unitOfMeasureDO) {
-        if(unitOfMeasureDO == null)
-        return null;
+        if(unitOfMeasureDO == null) {
+            return null;
+        }
         final UnitOfMeasure unitOfMeasure = new UnitOfMeasure();
         unitOfMeasure.setUom(unitOfMeasureDO.getUom());
         unitOfMeasure.setId(unitOfMeasureDO.getUomId());

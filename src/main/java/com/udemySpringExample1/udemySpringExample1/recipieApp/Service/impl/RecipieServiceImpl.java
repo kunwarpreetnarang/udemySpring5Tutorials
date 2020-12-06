@@ -2,13 +2,11 @@ package com.udemySpringExample1.udemySpringExample1.recipieApp.Service.impl;
 
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Controller.NotFoundException;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Converters.*;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.CategoryDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.RecipiesDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Ingredients;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Recipies;
-import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.IngredientRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.RecipieRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.UnitOfMeasureRepository;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -28,15 +25,13 @@ public class RecipieServiceImpl implements RecipieService {
     private final RecipieRepository recipieRepository;
     private final IngredientRepository ingredientRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
-    private final CategoryRepository categoryRepository;
     private final RecipiesConverter recipiesConverter;
     private final RecipiesDoConverter recipiesDoConverter;
     private final IngredientConverter ingredientConverter;
     private final IngredientDoConverter ingredientDoConverter;
     private final UnitOfMeasureConverter unitOfMeasureConverter;
-    private final CategoryConverter categoryConverter;
 
-    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter, IngredientDoConverter ingredientDoConverter, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureConverter unitOfMeasureConverter, CategoryRepository categoryRepository, CategoryConverter categoryConverter) {
+    public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter, IngredientDoConverter ingredientDoConverter, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureConverter unitOfMeasureConverter) {
         this.recipieRepository = recipieRepository;
         this.recipiesConverter = recipiesConverter;
         this.recipiesDoConverter = recipiesDoConverter;
@@ -45,8 +40,6 @@ public class RecipieServiceImpl implements RecipieService {
         this.ingredientRepository = ingredientRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.unitOfMeasureConverter = unitOfMeasureConverter;
-        this.categoryRepository = categoryRepository;
-        this.categoryConverter = categoryConverter;
     }
 
     @Override
@@ -68,8 +61,7 @@ public class RecipieServiceImpl implements RecipieService {
     @Override
     @Transactional
     public RecipiesDO saveRecipie(RecipiesDO recipiesDO) {
-        Recipies recipies = new Recipies();
-        recipies = recipiesDoConverter.convert(recipiesDO);
+        Recipies recipies = recipiesDoConverter.convert(recipiesDO);
         Recipies savedRecipie = recipieRepository.save(recipies);
         return recipiesConverter.convert(savedRecipie);
     }
@@ -120,8 +112,7 @@ public class RecipieServiceImpl implements RecipieService {
 
     @Override
     public IngredientsDO saveIngredient(IngredientsDO ingredientsDO, Long recipieId) {
-        Ingredients ingredients = new Ingredients();
-        ingredients = ingredientDoConverter.convert(ingredientsDO);
+        Ingredients ingredients = ingredientDoConverter.convert(ingredientsDO);
         Recipies recipies = new Recipies();
         recipies.setId(recipieId);
         ingredients.setRecipies(recipies);
@@ -145,8 +136,9 @@ public class RecipieServiceImpl implements RecipieService {
             Recipies recipies = recipieRepository.findById(id).orElse(null);
             Byte[] bytes= new Byte[multipartFile.getBytes().length];
             int i = 0;
-            for(byte b: multipartFile.getBytes())
-            bytes[i++] = b;
+            for (byte b : multipartFile.getBytes()){
+                bytes[i++] = b;
+            }
             recipies.setImages(bytes);
             Recipies saveRecipie = recipieRepository.save(recipies);
             return recipiesConverter.convert(saveRecipie);

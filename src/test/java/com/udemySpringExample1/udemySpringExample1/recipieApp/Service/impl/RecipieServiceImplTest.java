@@ -46,16 +46,10 @@ public class RecipieServiceImplTest {
     @Mock
     UnitOfMeasureConverter unitOfMeasureConverter;
 
-    @Mock
-    CategoryRepository categoryRepository;
-
-    @Mock
-    CategoryConverter categoryConverter;
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter, ingredientDoConverter, ingredientRepository, unitOfMeasureRepository, unitOfMeasureConverter, categoryRepository, categoryConverter
+        recipieService = new RecipieServiceImpl(recipieRepository, recipiesConverter, recipiesDoConverter, ingredientConverter, ingredientDoConverter, ingredientRepository, unitOfMeasureRepository, unitOfMeasureConverter
         );
     }
 

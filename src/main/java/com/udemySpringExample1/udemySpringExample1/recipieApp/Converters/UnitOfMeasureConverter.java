@@ -1,6 +1,5 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Converters;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.UnitOfMeasure;
 import org.springframework.core.convert.converter.Converter;
@@ -19,7 +18,6 @@ public class UnitOfMeasureConverter implements Converter<UnitOfMeasure, UnitOfMe
         final UnitOfMeasureDO unitOfMeasureDO = new UnitOfMeasureDO();
         unitOfMeasureDO.setUomId(source.getId());
         unitOfMeasureDO.setUom(source.getUom());
-        ObjectMapper objectMapper = new ObjectMapper();
         return unitOfMeasureDO;
     }
 }

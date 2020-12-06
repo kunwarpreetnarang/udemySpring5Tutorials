@@ -34,12 +34,12 @@ public class RecipiesDoConverter implements Converter<RecipiesDO, Recipies> {
         recipies.setNotes(notesDoConverter.convert(recipiesDO.getNotesDO()));
         recipies.setDirections(recipiesDO.getDirections());
 
-        if (recipiesDO.getCategoryDO() != null && recipiesDO.getCategoryDO().size() > 0){
+        if (recipiesDO.getCategoryDO() != null && !recipiesDO.getCategoryDO().isEmpty()){
             recipiesDO.getCategoryDO()
                     .forEach( category -> recipies.getCategories().add(categoryDoConverter.convert(category)));
         }
 
-        if (recipiesDO.getIngredientsDO() != null && recipiesDO.getIngredientsDO().size() > 0){
+        if (recipiesDO.getIngredientsDO() != null && !recipiesDO.getIngredientsDO().isEmpty()){
             recipiesDO.getIngredientsDO()
                     .forEach(ingredient -> recipies.getIngredients().add(ingredientDoConverter.convert(ingredient)));
         }

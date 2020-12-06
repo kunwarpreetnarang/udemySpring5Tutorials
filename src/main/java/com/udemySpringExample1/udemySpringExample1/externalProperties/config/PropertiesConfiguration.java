@@ -2,7 +2,6 @@ package com.udemySpringExample1.udemySpringExample1.externalProperties.config;
 
 import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeDataLoader;
 import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeJmsLoader;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,11 +38,8 @@ public class PropertiesConfiguration {
     @Value("${guru.jms.url}")
     String jmsUrl;
 
-    @Autowired
-    Environment env;
-
     @Bean
-    FakeDataLoader getFakeDataLoader() {
+    FakeDataLoader getFakeDataLoader(Environment env) {
         FakeDataLoader fakeDataLoader = new FakeDataLoader();
         fakeDataLoader.setUserName(user);
         fakeDataLoader.setPassword(env.getProperty("PASSWORD"));

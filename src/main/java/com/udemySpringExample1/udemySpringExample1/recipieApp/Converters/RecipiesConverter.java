@@ -35,12 +35,12 @@ public class RecipiesConverter implements Converter<Recipies, RecipiesDO> {
         recipiesDO.setDirections(recipies.getDirections());
         recipiesDO.setImages(recipies.getImages());
 
-        if (recipies.getCategories() != null && recipies.getCategories().size() > 0){
+        if (recipies.getCategories() != null && !recipies.getCategories().isEmpty()){
             recipies.getCategories()
                     .forEach( category -> recipiesDO.getCategoryDO().add(categoryConverter.convert(category)));
         }
 
-        if (recipies.getIngredients() != null && recipies.getIngredients().size() > 0){
+        if (recipies.getIngredients() != null && !recipies.getIngredients().isEmpty()){
             recipies.getIngredients()
                     .forEach(ingredient -> recipiesDO.getIngredientsDO().add(ingredientConverter.convert(ingredient)));
         }

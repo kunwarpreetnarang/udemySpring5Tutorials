@@ -30,11 +30,11 @@ public class RecipieLoader implements CommandLineRunner {
         recipieRepository.saveAll(getRecipies());
     }
 
-    public List<Recipies> getRecipies(){
+    public List<Recipies> getRecipies() throws Exception{
         List<Recipies> recipes = new ArrayList<>();
         //get UOM's
         Optional<UnitOfMeasure> eachUnit = unitOfMeasureRepository.findByUom("each");
-
+        final String UOMException = "Expected UOM Not Found";
         if(!eachUnit.isPresent()){
             throw new RuntimeException("UOM not found!");
         }
@@ -48,25 +48,25 @@ public class RecipieLoader implements CommandLineRunner {
         Optional<UnitOfMeasure> teaSpoonUomOptional = unitOfMeasureRepository.findByUom("teaspoon");
 
         if(!teaSpoonUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throw new RuntimeException(UOMException);
         }
 
         Optional<UnitOfMeasure> dashUomOptional = unitOfMeasureRepository.findByUom("dash");
 
         if(!dashUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throw new RuntimeException(UOMException);
         }
 
         Optional<UnitOfMeasure> pintUomOptional = unitOfMeasureRepository.findByUom("pint");
 
         if(!pintUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throw new RuntimeException(UOMException);
         }
 
         Optional<UnitOfMeasure> cupsUomOptional = unitOfMeasureRepository.findByUom("cup");
 
         if(!cupsUomOptional.isPresent()){
-            throw new RuntimeException("Expected UOM Not Found");
+            throw new RuntimeException(UOMException);
         }
 
         //get optionals
@@ -74,7 +74,7 @@ public class RecipieLoader implements CommandLineRunner {
         UnitOfMeasure tableSpoonUom = tableUnit.get();
         UnitOfMeasure teapoonUom = teaSpoonUomOptional.get();
         UnitOfMeasure dashUom = dashUomOptional.get();
-        UnitOfMeasure pintUom = dashUomOptional.get();
+        UnitOfMeasure pintUom = pintUomOptional.get();
         UnitOfMeasure cupsUom = cupsUomOptional.get();
 
         //get Categories
@@ -187,6 +187,7 @@ public class RecipieLoader implements CommandLineRunner {
         tacosRecipe.getIngredients().add(new Ingredients("packed baby arugula", 3, cupsUom, tacosRecipe));
         tacosRecipe.getIngredients().add(new Ingredients("medium ripe avocados, slic", 2, eachUom, tacosRecipe));
         tacosRecipe.getIngredients().add(new Ingredients("radishes, thinly sliced", 4, eachUom, tacosRecipe));
+        tacosRecipe.getIngredients().add(new Ingredients("carrot, sliced", 2, pintUom, tacosRecipe));
 
         tacosRecipe.getCategories().add(americanCategory);
         tacosRecipe.getCategories().add(mexicanCategory);
