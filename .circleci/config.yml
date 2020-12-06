@@ -46,9 +46,5 @@ jobs:
             SONARQUBE_SCANNER_PARAMS: '{"sonar.host.url":"https://sonarcloud.io"}'
             SONAR_SCANNER_OPTS: "-Xmx2048m"
           command: mvn verify sonar:sonar
-workflows:
-  main:
-    jobs:
-      - build:
-          context: SonarCloud
+
 
