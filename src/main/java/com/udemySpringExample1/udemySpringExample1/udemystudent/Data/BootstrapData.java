@@ -6,10 +6,12 @@ import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.Sub
 import com.udemySpringExample1.udemySpringExample1.udemystudent.Repositories.TeacherRepository;
 import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Student;
 import com.udemySpringExample1.udemySpringExample1.udemystudent.Model.Teacher;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class BootstrapData implements CommandLineRunner {
 
     private final StudentRepository studentRepository;
@@ -24,9 +26,12 @@ public class BootstrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Student s1, s2;
-        Teacher t1, t2;
-        Subject sub1, sub2;
+        Student s1;
+        Student s2;
+        Teacher t1;
+        Teacher t2;
+        Subject sub1;
+        Subject sub2;
 
         s1 = new Student(101, "abc");
         s2 = new Student(102, "pqr");
@@ -65,10 +70,10 @@ public class BootstrapData implements CommandLineRunner {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Started Bootstrap data initialization:");
-        System.out.println("No. of student: " + studentRepository.count());
-        System.out.println("No. of teachers: " + teacherRepository.count());
-        System.out.println("No. of subject: " + subjectRepository.count());
-        System.out.println("Subject with no. of students: \n sub1: " + sub1.getStudent().size() + " sub2: " + sub2.getStudent().size());
+        log.info("Started Bootstrap data initialization:");
+        log.info("No. of student: " + studentRepository.count());
+        log.info("No. of teachers: " + teacherRepository.count());
+        log.info("No. of subject: " + subjectRepository.count());
+        log.info("Subject with no. of students: \n sub1: " + sub1.getStudent().size() + " sub2: " + sub2.getStudent().size());
     }
 }

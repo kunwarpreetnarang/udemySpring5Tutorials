@@ -2,10 +2,12 @@ package com.udemySpringExample1.udemySpringExample1.externalProperties;
 
 import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeDataLoader;
 import com.udemySpringExample1.udemySpringExample1.externalProperties.DataLoader.FakeJmsLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+@Slf4j
 @SpringBootApplication
 public class ExternalPropertiesApplication {
 
@@ -15,16 +17,16 @@ public class ExternalPropertiesApplication {
 
         FakeDataLoader fakeDataLoader = context.getBean(FakeDataLoader.class);
 
-        System.out.println("------- MySQL information loading -------------");
-        System.out.println("UserName: " + fakeDataLoader.getUserName());
-        System.out.println("Password: " + fakeDataLoader.getPassword());
-        System.out.println("URL: " + fakeDataLoader.getUrl());
+        log.info("------- MySQL information loading -------------");
+        log.info("UserName: " + fakeDataLoader.getUserName());
+        log.info("Password: " + fakeDataLoader.getPassword());
+        log.info("URL: " + fakeDataLoader.getUrl());
 
-        System.out.println("------- JMS information loading -------------");
         FakeJmsLoader fakeJmsLoader = context.getBean(FakeJmsLoader.class);
-        System.out.println("UserName: " + fakeJmsLoader.getUsername());
-        System.out.println("Password: " + fakeJmsLoader.getPassword());
-        System.out.println("URL: " + fakeJmsLoader.getUrl());
+        log.info("------- JMS information loading -------------");
+        log.info("UserName: " + fakeJmsLoader.getUsername());
+        log.info("Password: " + fakeJmsLoader.getPassword());
+        log.info("URL: " + fakeJmsLoader.getUrl());
 
     }
 

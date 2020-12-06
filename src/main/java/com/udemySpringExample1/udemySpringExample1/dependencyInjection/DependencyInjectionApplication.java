@@ -4,10 +4,12 @@ import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controlle
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.ProfilesController;
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.PropertyInjectorController;
 import com.udemySpringExample1.udemySpringExample1.dependencyInjection.Controllers.SetterInjectorController;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+@Slf4j
 @SpringBootApplication
 public class DependencyInjectionApplication {
 
@@ -16,20 +18,20 @@ public class DependencyInjectionApplication {
         ApplicationContext context = SpringApplication.run(DependencyInjectionApplication.class, args);
 
         ProfilesController profileController = (ProfilesController) context.getBean("profilesController");
-        System.out.println("-----Active Profile Bean-----");
-        System.out.println(profileController.showGreeting());
+        log.info("-----Active Profile Bean-----");
+        log.info(profileController.showGreeting());
 
         ConstructorInjectorController constructorInjectorController = (ConstructorInjectorController) context.getBean("constructorInjectorController");
-        System.out.println("-----Constructor Bean-----");
-        System.out.println(constructorInjectorController.showGreeting());
+        log.info("-----Constructor Bean-----");
+        log.info(constructorInjectorController.showGreeting());
 
         PropertyInjectorController propertyInjectorController = (PropertyInjectorController) context.getBean("propertyInjectorController");
-        System.out.println("-----Property Bean-----");
-        System.out.println(propertyInjectorController.showGreeting());
+        log.info("-----Property Bean-----");
+        log.info(propertyInjectorController.showGreeting());
 
         SetterInjectorController setterInjectorController = (SetterInjectorController) context.getBean("setterInjectorController");
-        System.out.println("----Setter Bean-----");
-        System.out.println(setterInjectorController.showGreeting());
+        log.info("----Setter Bean-----");
+        log.info(setterInjectorController.showGreeting());
     }
 
 }

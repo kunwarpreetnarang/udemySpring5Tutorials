@@ -36,7 +36,7 @@ import java.util.Optional;
 public class IndexController {
     private final CategoryRepository categoryRepository;
     private final RecipieService recipieService;
-
+    private static final String saveRecipeUrl = "recipie-app/save-recipe";
     @Autowired
     public IndexController(CategoryRepository categoryRepository, RecipieService recipieService) {
         this.categoryRepository = categoryRepository;
@@ -46,7 +46,7 @@ public class IndexController {
     @RequestMapping("/index")
     public String getIndexPage(Model model){
         Optional<Categories> categoryRepositories = categoryRepository.findByCategoryName("Indian");
-        System.out.println("Total Indian Category is: " + categoryRepositories.isPresent());
+        log.info("Total Indian Category is: " + categoryRepositories.isPresent());
         model.addAttribute("recipies" , recipieService.getRecipies());
         return "recipie-app/index";
     }
@@ -61,7 +61,7 @@ public class IndexController {
     @RequestMapping("/addRecipe")
     public String getRecipeForm(Model model){
         model.addAttribute("recipeForm", new RecipiesDO());
-        return "recipie-app/save-recipe";
+        return saveRecipeUrl;
     }
 
     @PostMapping("/saveRecipie")
@@ -72,7 +72,7 @@ public class IndexController {
                 log.debug(objectError.toString());
             });
 
-            return "recipie-app/save-recipe";
+            return saveRecipeUrl;
         }
         RecipiesDO savedDO = recipieService.saveRecipie(recipiesDO);
         savedDO = recipieService.saveRecipeImage(file, savedDO.getRecipieId());
@@ -82,7 +82,7 @@ public class IndexController {
     @RequestMapping("/recipie/update/{id}")
     public String updateRecipie(@PathVariable String id, Model model){
         model.addAttribute("recipeForm", recipieService.findRecipieDoById(Long.valueOf(id)));
-        return "recipie-app/save-recipe";
+        return saveRecipeUrl;
     }
 
     @RequestMapping("/recipie/delete/{id}")
