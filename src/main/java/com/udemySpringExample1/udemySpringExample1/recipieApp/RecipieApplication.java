@@ -10,7 +10,7 @@ public class RecipieApplication {
     public static void main(String[] args) {
 
         ApplicationContext context = SpringApplication.run(RecipieApplication.class, args);
-
+        context.getApplicationName();
     }
 
 }

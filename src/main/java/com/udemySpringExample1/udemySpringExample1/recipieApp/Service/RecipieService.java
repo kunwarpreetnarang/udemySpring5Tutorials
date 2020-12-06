@@ -1,6 +1,5 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Service;
 
-import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.CategoryDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.IngredientsDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.RecipiesDO;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfMeasureDO;
