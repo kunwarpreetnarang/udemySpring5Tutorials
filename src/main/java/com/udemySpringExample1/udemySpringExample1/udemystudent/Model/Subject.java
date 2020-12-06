@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -22,7 +21,7 @@ public class Subject {
 
     @OneToMany
     @JoinColumn(name="subject_id")
-    Set<Student> student = new HashSet<Student>();
+    Set<Student> student = new HashSet<>();
 
     public Subject(){
 
