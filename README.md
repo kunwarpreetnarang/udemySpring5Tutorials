@@ -2,7 +2,7 @@
 Udemy spring 5 framework tutorials
 
 ## languages and tools
--Java
+- Java
 - Spring
 - Thymeleaf
 - H2/mySQL db
