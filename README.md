@@ -1,6 +1,15 @@
 # udemySpring5Tutorials
 Udemy spring 5 framework tutorials
 
+## languages and tools
+-Java
+- Spring
+- Thymeleaf
+- H2/mySQL db
+- circle ci
+- jenkins
+- sonar
+
 [![CircleCI](https://circleci.com/gh/springframeworkguru/spring5-recipe-app.svg?style=svg)] (https://app.circleci.com/pipelines/github/kunwarpreetnarang/udemySpring5Tutorials)
 ## Sonar
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=kunwarpreetnarang_udemySpring5Tutorials)
