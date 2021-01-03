@@ -4,19 +4,19 @@ pipeline {
         stage('--- Clean and compile project ---') {
             steps {
                 //
-                sh "mvn clean"
+                bat "mvn clean"
             }
         }
         stage('--- Run Test Cases ---') {
             steps {
                 //
-                sh "mvn test"
+                bat "mvn test"
             }
         }
         stage('--- Deploy Project package ---') {
             steps {
                 //
-                sh "mvn package"
+                bat "mvn package"
             }
         }
     }
