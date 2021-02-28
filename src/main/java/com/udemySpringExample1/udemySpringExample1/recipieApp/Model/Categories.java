@@ -1,5 +1,7 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Model;
 
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@ApiModel(description = "Category entity model is used to save different categories of recipes")
 public class Categories {
 
     @Id

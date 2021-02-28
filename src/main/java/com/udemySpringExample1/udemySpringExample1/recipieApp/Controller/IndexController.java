@@ -6,6 +6,9 @@ import com.udemySpringExample1.udemySpringExample1.recipieApp.DataObject.UnitOfM
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Model.Categories;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Repository.CategoryRepository;
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Service.RecipieService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +34,7 @@ import java.io.InputStream;
 import java.util.Optional;
 
 @Slf4j
+@Api(tags = "Recipe Application Services Controller", value = "Index Controller")
 @Controller
 public class IndexController {
     private final CategoryRepository categoryRepository;
@@ -43,7 +46,8 @@ public class IndexController {
         this.recipieService = recipieService;
     }
 
-    @RequestMapping("/index")
+    @GetMapping("/index")
+    @ApiOperation(value = "Returns home page for application")
     public String getIndexPage(Model model){
         Optional<Categories> categoryRepositories = categoryRepository.findByCategoryName("Indian");
         log.info("Total Indian Category is: " + categoryRepositories.isPresent());
@@ -51,21 +55,22 @@ public class IndexController {
         return "recipie-app/index";
     }
 
-    @RequestMapping("/recipie/show/{id}")
+    @GetMapping("/recipie/show/{id}")
+    @ApiOperation(value = "Returns recipe details for a specific recipe id")
     public String getRecipieById( Model model, @PathVariable String id){
         Long recipieId = Long.valueOf(id);
         model.addAttribute("recipie", recipieService.getRecipieById(recipieId));
         return "recipie-app/show-recipe";
     }
 
-    @RequestMapping("/addRecipe")
+    @GetMapping("/addRecipe")
     public String getRecipeForm(Model model){
         model.addAttribute("recipeForm", new RecipiesDO());
         return saveRecipeUrl;
     }
 
     @PostMapping("/saveRecipie")
-    public String saveRecipie(@Valid @ModelAttribute("recipeForm") RecipiesDO recipiesDO, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file){
+    public String saveRecipie(@ApiParam(value = "Recipes DO as request body for saving recipe", name="RecipiesDO", required = true) @Valid @ModelAttribute("recipeForm") RecipiesDO recipiesDO, BindingResult bindingResult, @RequestParam("imagefile") MultipartFile file){
         if(bindingResult.hasErrors()){
 
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -79,37 +84,37 @@ public class IndexController {
         return "redirect:/recipie/show/" + savedDO.getRecipieId();
     }
 
-    @RequestMapping("/recipie/update/{id}")
+    @GetMapping("/recipie/update/{id}")
     public String updateRecipie(@PathVariable String id, Model model){
         model.addAttribute("recipeForm", recipieService.findRecipieDoById(Long.valueOf(id)));
         return saveRecipeUrl;
     }
 
-    @RequestMapping("/recipie/delete/{id}")
+    @GetMapping("/recipie/delete/{id}")
     public String deleteRecipie(@PathVariable String id, Model model){
         model.addAttribute("recipies", recipieService.deleteRecipies(Long.valueOf(id)));
         return "redirect:/index";
     }
 
-    @RequestMapping("/recipie/ingredient/{id}")
+    @GetMapping("/recipie/ingredient/{id}")
     public String getIngredient(@PathVariable String id, Model model){
         model.addAttribute("recipie", recipieService.findRecipieDoById(Long.valueOf(id)));
         return "recipie-app/list-ingredient";
     }
 
-    @RequestMapping("/recipie/{recipieId}/show/ingredient/{id}")
+    @GetMapping("/recipie/{recipieId}/show/ingredient/{id}")
     public String viewIngredient(@PathVariable String recipieId, Model model, @PathVariable String id){
         model.addAttribute("ingredient", recipieService.findIngredientById(Long.valueOf(recipieId),Long.valueOf(id)));
         return "recipie-app/show-ingredient";
     }
 
-    @RequestMapping("/recipie/{recipieId}/delete/ingredient/{id}")
+    @GetMapping("/recipie/{recipieId}/delete/ingredient/{id}")
     public String deleteIngredient(@PathVariable String recipieId, @PathVariable String id){
         recipieService.deleteIngredient(Long.valueOf(recipieId),Long.valueOf(id));
         return "redirect:/recipie/show/" + recipieId;
     }
 
-    @RequestMapping("/addIngredient/{recipieId}")
+    @GetMapping("/addIngredient/{recipieId}")
     public String getIngredientForm(Model model, @PathVariable String recipieId){
         IngredientsDO ingredientsDO = new IngredientsDO();
         ingredientsDO.setRecipieId(Long.valueOf(recipieId));
@@ -122,12 +127,12 @@ public class IndexController {
     }
 
     @PostMapping("/saveIngredient/{recipieId}")
-    public String saveIngredient(@ModelAttribute IngredientsDO ingredientsDO, @PathVariable String recipieId){
+    public String saveIngredient(@ApiParam(value = "Take IngredientsDO as request body") @ModelAttribute IngredientsDO ingredientsDO, @PathVariable String recipieId){
         IngredientsDO savedDO = recipieService.saveIngredient(ingredientsDO, Long.valueOf(recipieId));
         return "redirect:/recipie/ingredient/" + savedDO.getRecipieId();
     }
 
-    @RequestMapping("/recipie/{recipieId}/update/ingredient/{id}")
+    @GetMapping("/recipie/{recipieId}/update/ingredient/{id}")
     public String updateIngredient(@PathVariable String recipieId, @PathVariable String id, Model model){
         model.addAttribute("ingredientForm", recipieService.findIngredientById(Long.valueOf(recipieId),Long.valueOf(id)));
         model.addAttribute("uomList", recipieService.listAllUOM());

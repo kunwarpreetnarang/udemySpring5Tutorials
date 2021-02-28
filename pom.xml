@@ -22,6 +22,7 @@
 		<sonar.projectKey>kunwarpreetnarang_udemySpring5Tutorials</sonar.projectKey>
 		<sonar.organization>kunwarpreetnarang</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+<!--		<start-class>com.udemySpringExample1.udemySpringExample1.udemystudent.UdemySpringExample1Application</start-class>-->
 	</properties>
 
 	<dependencies>
@@ -107,6 +108,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+		<!-- Swagger API Dependencies -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-data-rest</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -114,6 +137,21 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			<!--	<configuration>
+					<fork>true</fork>
+					<mainClass>com.udemySpringExample1.udemySpringExample1.udemystudent.UdemySpringExample1Application</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<id>repackage</id>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+						<configuration>
+							<classifier>exec</classifier>
+						</configuration>
+					</execution>
+				</executions>-->
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
