@@ -1,6 +1,8 @@
 package com.udemySpringExample1.udemySpringExample1.recipieApp.Model;
 
 import com.udemySpringExample1.udemySpringExample1.recipieApp.Constants.Difficulty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
@@ -12,13 +14,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@ApiModel(description = "This model is required to create a recipe")
 public class Recipies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "This is auto generated id")
     Long id;
 
     @NotNull
     @Size(min = 10, max = 255)
+    @ApiModelProperty(notes = "Recipe Description", example = "Butter Chicken")
     private String description;
 
     @Min(1)

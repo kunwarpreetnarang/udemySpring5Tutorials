@@ -3,3 +3,16 @@ guru:
     username: abcd
     password: 123
     url: youtube.com
+app:
+  name: spring boot Recipe application
+  api:
+    title: Spring Boot Recipe application APIs
+    version: 1.0.0
+    description: Recipe application APIs description
+    base-package: com.udemySpringExample1.udemySpringExample1.recipieApp
+    contact-name: kunwarpreet
+    contact-email: apisupportgroup@abc.com
+    license: 2.0
+    license-url: http://abcsup.com
+    swagger:
+      enable: true
