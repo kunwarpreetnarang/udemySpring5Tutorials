@@ -4,6 +4,8 @@ import com.udemySpringExample1.udemySpringExample1.dependencyInjection.businessL
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class ConstructorInjectorControllerTest {
 
     ConstructorInjectorController constructorInjectorController;
@@ -15,5 +17,7 @@ public class ConstructorInjectorControllerTest {
     @Test
     public void showGreeting() {
         System.out.println(constructorInjectorController.showGreeting());
+        String res = "Constructor Injected: Dependency Injection implementation without spring context!";
+        assertEquals(constructorInjectorController.showGreeting(), res);
     }
 }

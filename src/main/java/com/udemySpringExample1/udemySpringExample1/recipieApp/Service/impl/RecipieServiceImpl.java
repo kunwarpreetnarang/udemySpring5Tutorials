@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -30,6 +31,7 @@ public class RecipieServiceImpl implements RecipieService {
     private final IngredientConverter ingredientConverter;
     private final IngredientDoConverter ingredientDoConverter;
     private final UnitOfMeasureConverter unitOfMeasureConverter;
+    private static final Logger LOG = Logger.getLogger(RecipieServiceImpl.class.getName());
 
     public RecipieServiceImpl(RecipieRepository recipieRepository, RecipiesConverter recipiesConverter, RecipiesDoConverter recipiesDoConverter, IngredientConverter ingredientConverter, IngredientDoConverter ingredientDoConverter, IngredientRepository ingredientRepository, UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureConverter unitOfMeasureConverter) {
         this.recipieRepository = recipieRepository;
@@ -55,6 +57,7 @@ public class RecipieServiceImpl implements RecipieService {
         if(recipie == null){
             throw new NotFoundException("Recipe Not Found. For Recipie ID: " + recipeieId.toString());
         }
+        LOG.info("recipe found " + recipie);
         return recipie;
     }
 

@@ -32,6 +32,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Slf4j
 @Api(tags = "Recipe Application Services Controller", value = "Index Controller")
@@ -40,6 +41,7 @@ public class IndexController {
     private final CategoryRepository categoryRepository;
     private final RecipieService recipieService;
     private static final String saveRecipeUrl = "recipie-app/save-recipe";
+    private static final Logger LOG = Logger.getLogger(IndexController.class.getName());
     @Autowired
     public IndexController(CategoryRepository categoryRepository, RecipieService recipieService) {
         this.categoryRepository = categoryRepository;
@@ -58,6 +60,7 @@ public class IndexController {
     @GetMapping("/recipie/show/{id}")
     @ApiOperation(value = "Returns recipe details for a specific recipe id")
     public String getRecipieById( Model model, @PathVariable String id){
+        LOG.info("Searching for recipe: " + id);
         Long recipieId = Long.valueOf(id);
         model.addAttribute("recipie", recipieService.getRecipieById(recipieId));
         return "recipie-app/show-recipe";
