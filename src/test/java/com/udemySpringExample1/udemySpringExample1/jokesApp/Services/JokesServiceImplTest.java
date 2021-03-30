@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.*;
 
 
@@ -28,5 +30,6 @@ public class JokesServiceImplTest {
         when(chuckNorrisQuotes.getRandomQuote()).thenReturn(chuckJoke);
 
         String jokes = jokesService.getJokes();
+        assertEquals(chuckJoke, jokes);
     }
 }
