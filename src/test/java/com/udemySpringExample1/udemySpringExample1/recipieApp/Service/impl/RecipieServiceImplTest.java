@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -69,18 +70,4 @@ public class RecipieServiceImplTest {
         verify(recipieRepository, times(1)).findAll();
     }
 
-    @Test
-    public void getRecipeById() {
-        Recipies recipies = new Recipies();
-        Recipies recipies1 = new Recipies();
-        Optional<List> recipeList = null;
-
-        Long recipeId = 1L;
-      //  when(recipieRepository.findById(recipeId)).thenReturn(recipeList.orElse(null));
-
-        List<Recipies> recipiesSet = recipieService.getRecipies();
-
-        assertEquals(2, recipiesSet.size());
-        verify(recipieRepository, times(1)).findById(recipeId);
-    }
 }
