@@ -1,0 +1,12 @@
+create table categories (id bigint not null auto_increment, category_name varchar(255), primary key (id)) engine=InnoDB;
+create table ingredients (id bigint not null auto_increment, amount bigint not null, description varchar(255), recipies_id bigint, unit_of_measure_id bigint, primary key (id)) engine=InnoDB;
+create table notes (id bigint not null auto_increment, recipie_notes longtext, recipies_id bigint, primary key (id)) engine=InnoDB;
+create table recipies (id bigint not null auto_increment, cook_time integer not null, description varchar(255) not null, difficulty varchar(255), directions longtext, images longblob, prep_time integer not null, servings integer not null, source varchar(255) not null, url varchar(255), notes_id bigint, primary key (id)) engine=InnoDB;
+create table recipies_categories (recipies_id bigint not null, categories_id bigint not null, primary key (recipies_id, categories_id)) engine=InnoDB;
+create table unit_of_measure (id bigint not null auto_increment, uom varchar(255), primary key (id)) engine=InnoDB;
+alter table ingredients add constraint FKg8j15n2r5uerk303kq483vyjr foreign key (recipies_id) references recipies (id);
+alter table ingredients add constraint FKjy3cjes7ep5fwlff4s7fnvpss foreign key (unit_of_measure_id) references unit_of_measure (id);
+alter table notes add constraint FK6e44i67pn5euc26cs2hbb8ajh foreign key (recipies_id) references recipies (id);
+alter table recipies add constraint FKp9akpb7u0cpl7uy0nm7i1ul43 foreign key (notes_id) references notes (id);
+alter table recipies_categories add constraint FKdy7yus5g6e7ylfn4y93r4eojt foreign key (categories_id) references categories (id);
+alter table recipies_categories add constraint FKq54299w2ki6dap83h2vxntfm6 foreign key (recipies_id) references recipies (id);create table categories (id bigint not null auto_increment, category_name varchar(255), primary key (id)) engine=InnoDB;
